@@ -4,16 +4,24 @@
   margin: 0;
 }
 
+.game {
+  position: relative;
+}
+
 #game-board {
   display: grid;
+  justify-content: center;
   grid-template-rows: repeat(21, 1fr);
   grid-template-columns: repeat(21, 1fr);
   height: 100vmin;
   width: 100vmin;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
 }
 
 .board-element {
-  background-color: rgb(191, 191, 191);
+  /* background-color: rgb(191, 191, 191); */
   /* border: 1px solid black; */
 }
 
@@ -22,9 +30,53 @@
 }
 
 .body-segment {
-  background-color: aquamarine;
+  background-color: rgba(0, 0, 0, 0.452);
+  /* filter: invert(100%); */
+}
+
+.body-segment--head {
+  background-color: rgba(211, 215, 5, 0.851);
+  /* filter: invert(100%); */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    background-color: #61ff00;
+  }
+  50% {
+    background-color: #ffe600;
+  }
+  100% {
+    transform: rotate(360deg);
+    background-color: #61ff00;
+  }
 }
 
 .food-segment {
-  background-color: black;
+  position: relative;
+}
+
+.food-segment::after {
+  content: '';
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  position: absolute;
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  background-color: #61ff00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  /* border-radius: 12px; */
+  animation: 3s infinite ease-in-out spin;
+}
+
+.results {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
