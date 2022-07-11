@@ -1,4 +1,5 @@
-import { GAME_SIZE } from "./index.js";
+import { GAME_SIZE, GAME_SPEED } from "./index.js";
+import { Points } from "./points.js";
 import { onSnake, expandSnake } from "./snake.js";
 
 let foodPosition = {
@@ -12,6 +13,7 @@ export const setFoodPosition = (newFoodPosition) =>
 
 export const update = () => {
   if (onSnake(getFoodPosition())) {
+    Points.setPoints(Points.getPoints() + GAME_SPEED);
     expandSnake();
     respawnFood();
   }

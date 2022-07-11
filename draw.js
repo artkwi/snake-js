@@ -1,6 +1,7 @@
 import { getSnakePosition } from "./snake.js";
 import { getFoodPosition } from "./food.js";
 import { GAME_SIZE, isGameStarted } from "./index.js";
+import { Points } from "./points.js";
 
 export const draw = () => {
   if (!isGameStarted) {
@@ -12,9 +13,11 @@ export const draw = () => {
   // wynik
   const x = document.getElementById("x");
   const y = document.getElementById("y");
+  const pointsEl = document.getElementById("points");
 
   x.textContent = getSnakePosition()[0].x;
   y.textContent = getSnakePosition()[0].y;
+  pointsEl.textContent = Points.getPoints();
 
   // end wynik
 

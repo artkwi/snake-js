@@ -6,7 +6,6 @@ export const GAME_SIZE = 11;
 export const GAME_SPEED = 4;
 
 export let isGameStarted = false;
-export let points
 
 const main = () => {
   update();
