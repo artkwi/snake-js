@@ -1,16 +1,16 @@
 import { getSnakePosition } from "./snake.js";
-import { getFoodPosition } from "./food.js";
+import { getExtraFoodPosition, getFoodPosition } from "./food.js";
 import { GAME_SIZE, isGameStarted } from "./index.js";
 import { Points } from "./points.js";
 import { Obstacles } from "./obstacles.js";
 
-const drawFood = () => {
-  const { x, y } = getFoodPosition();
+const drawElement = (position, className) => {
+  const { x, y } = position;
   const bodyElements = document.getElementsByClassName(
     `board-element-${x}-${y}`
   );
 
-  bodyElements[0].classList.add("food-segment");
+  bodyElements[0].classList.add(className);
 };
 
 const drawObstacles = () => {
@@ -52,6 +52,7 @@ const laterBoardDraw = () => {
       boardElement[0].classList.remove(
         `body-segment`,
         `food-segment`,
+        `food-segment--extra`,
         `body-segment--head`
       );
     }
@@ -88,6 +89,7 @@ export const draw = () => {
     }
   });
 
-  drawFood();
+  drawElement(getFoodPosition(), 'food-segment');
+  drawElement(getExtraFoodPosition() ,'food-segment--extra');
   drawObstacles();
 };

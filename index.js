@@ -20,5 +20,5 @@ window.setInterval(main, 1000 / GAME_SPEED);
 const update = () => {
   updateSnake();
   updateFood();
-  checkForDeath();
+  // checkForDeath();
 };
