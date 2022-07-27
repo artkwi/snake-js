@@ -1,4 +1,5 @@
 import { draw } from "./draw.js";
+import { checkForDeath } from "./endGame.js";
 import { update as updateFood } from "./food.js";
 import { update as updateSnake, getSnakePosition, onSnake } from "./snake.js";
 import '/music.js';
@@ -20,21 +21,4 @@ const update = () => {
   updateSnake();
   updateFood();
   checkForDeath();
-};
-
-const restartGame = () => {
-  window.location = "/";
-};
-
-const checkForDeath = () => {
-  const snakePosition = getSnakePosition();
-  const isHeadIsOnBody = onSnake(snakePosition[0], { withoutHead: true });
-  const isSnakeOutsideGame =
-    snakePosition[0].x < 0 ||
-    snakePosition[0].y < 0 ||
-    snakePosition[0].x >= GAME_SIZE ||
-    snakePosition[0].y >= GAME_SIZE;
-  if (isHeadIsOnBody || isSnakeOutsideGame) {
-    // confirm("Koniec gry.", restartGame());
-  }
 };

@@ -2,39 +2,30 @@ import { getSnakePosition } from "./snake.js";
 import { getFoodPosition } from "./food.js";
 import { GAME_SIZE, isGameStarted } from "./index.js";
 import { Points } from "./points.js";
+import { Obstacles } from "./obstacles.js";
 
-export const draw = () => {
-  if (!isGameStarted) {
-    initialBoardDraw();
-  } else {
-    laterBoardDraw();
-  }
+const drawFood = () => {
+  const { x, y } = getFoodPosition();
+  const bodyElements = document.getElementsByClassName(
+    `board-element-${x}-${y}`
+  );
 
-  // wynik
-  const x = document.getElementById("x");
-  const y = document.getElementById("y");
-  const pointsEl = document.getElementById("points");
+  bodyElements[0].classList.add("food-segment");
+};
 
-  x.textContent = getSnakePosition()[0].x;
-  y.textContent = getSnakePosition()[0].y;
-  pointsEl.textContent = Points.getPoints();
+const drawObstacles = () => {
+  const obstacles = Obstacles.getObstacles();
 
-  // end wynik
-
-  getSnakePosition().map(({ x, y }, i) => {
-    const bodyElements = document.getElementsByClassName(
+  obstacles.map(({ x, y }, i) => {
+    const boardElements = document.getElementsByClassName(
       `board-element-${x}-${y}`
     );
-    if (bodyElements.length) {
-      if (i === 0) {
-        bodyElements?.[0].classList?.add("body-segment--head");
-      }
-      bodyElements?.[0].classList?.add("body-segment");
+    if (boardElements.length) {
+      boardElements?.[0].classList?.add("obstacle");
     }
   });
+}
 
-  drawFood();
-};
 
 const initialBoardDraw = () => {
   const gameBoard = document.getElementById("game-board");
@@ -67,11 +58,36 @@ const laterBoardDraw = () => {
   }
 };
 
-const drawFood = () => {
-  const { x, y } = getFoodPosition();
-  const bodyElements = document.getElementsByClassName(
-    `board-element-${x}-${y}`
-  );
+export const draw = () => {
+  if (!isGameStarted) {
+    initialBoardDraw();
+  } else {
+    laterBoardDraw();
+  }
 
-  bodyElements[0].classList.add("food-segment");
+  // wynik
+  const x = document.getElementById("x");
+  const y = document.getElementById("y");
+  const pointsEl = document.getElementById("points");
+
+  x.textContent = getSnakePosition()[0].x;
+  y.textContent = getSnakePosition()[0].y;
+  pointsEl.textContent = Points.getPoints();
+
+  // end wynik
+
+  getSnakePosition().map(({ x, y }, i) => {
+    const bodyElements = document.getElementsByClassName(
+      `board-element-${x}-${y}`
+    );
+    if (bodyElements.length) {
+      if (i === 0) {
+        bodyElements?.[0].classList?.add("body-segment--head");
+      }
+      bodyElements?.[0].classList?.add("body-segment");
+    }
+  });
+
+  drawFood();
+  drawObstacles();
 };

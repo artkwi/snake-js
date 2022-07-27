@@ -80,3 +80,9 @@
   top: 10px;
   right: 10px;
 }
+
+.obstacle {
+  background-color: #f5f5f5;
+  box-shadow: inset 0px 0px 4px 3px rgb(25 25 25);
+  border-radius: 6px;
+}

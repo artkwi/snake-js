@@ -1,4 +1,5 @@
 import { GAME_SIZE, GAME_SPEED } from "./index.js";
+import { Obstacles } from "./obstacles.js";
 import { Points } from "./points.js";
 import { onSnake, expandSnake } from "./snake.js";
 
@@ -21,7 +22,7 @@ export const update = () => {
 
 const respawnFood = () => {
   let newFoodPosition = null;
-  while (newFoodPosition === null || onSnake(newFoodPosition)) {
+  while (newFoodPosition === null || onSnake(newFoodPosition) || Obstacles.onObstacle(newFoodPosition)) {
     const x = Math.floor(Math.random() * GAME_SIZE);
     const y = Math.floor(Math.random() * GAME_SIZE);
     newFoodPosition = { x, y };
