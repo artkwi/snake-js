@@ -1,9 +1,10 @@
-import { GAME_SIZE } from "./index.js";
+import { gameIntervelId, GAME_SIZE } from "./index.js";
 import { Obstacles } from "./obstacles.js";
 import { getSnakePosition, onSnake } from "./snake.js";
 
 const restartGame = () => {
-  window.location = "/";
+  clearInterval(gameIntervelId);
+  window.location.reload();
 };
 
 export const checkForDeath = () => {
@@ -16,7 +17,6 @@ export const checkForDeath = () => {
     snakePosition[0].x >= GAME_SIZE ||
     snakePosition[0].y >= GAME_SIZE;
   if (isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle) {
-    console.log('koniec gey');
     confirm("Koniec gry.", restartGame());
   }
 };
