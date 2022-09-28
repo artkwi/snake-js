@@ -5,7 +5,7 @@ import { update as updateSnake, getSnakePosition, onSnake } from "./snake.js";
 import '/music.js';
 
 export const GAME_SIZE = 11;
-export const GAME_SPEED = 4;
+export const GAME_SPEED = 2;
 
 export let isGameStarted = false;
 
@@ -20,5 +20,5 @@ window.setInterval(main, 1000 / GAME_SPEED);
 const update = () => {
   updateSnake();
   updateFood();
-  // checkForDeath();
+  checkForDeath();
 };

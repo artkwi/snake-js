@@ -9,8 +9,8 @@ let foodPosition = {
 };
 
 let extraFoodPosition = {
-  x: 9,
-  y: 10,
+  x: 5,
+  y: 6,
 };
 
 export const getFoodPosition = () => foodPosition;
@@ -21,16 +21,21 @@ export const setFoodPosition = (newFoodPosition) =>
 export const setExtraFoodPosition = (newFoodPosition) =>
   (extraFoodPosition = { ...newFoodPosition });
 
+export const removeExtraFoodPosition = () => extraFoodPosition = null;
+
 export const update = () => {
   if (onSnake(getFoodPosition())) {
     Points.setPoints(Points.getPoints() + GAME_SPEED);
     expandSnake();
     respawnFood();
+    if (shouldRespawnExtraFood()) {
+      respawnExtraFood();
+    }
   }
   else if (onSnake(getExtraFoodPosition())) {
     Points.setPoints(Points.getPoints() + 4 * GAME_SPEED);
     expandSnake();
-    respawnExtraFood();
+    removeExtraFoodPosition();
   }
 };
 
@@ -44,6 +49,16 @@ const respawnFood = () => {
 
   setFoodPosition(newFoodPosition);
 };
+
+const shouldRespawnExtraFood = () => {
+  if (getExtraFoodPosition()) {
+    return false;
+  }
+  const POSSIBILITIES = 3;
+  const randomNumber = Math.floor(Math.random() * (POSSIBILITIES - 1));
+
+  return randomNumber % POSSIBILITIES === 0;
+}
 
 const respawnExtraFood = () => {
   let newExtraFoodPosition = null;

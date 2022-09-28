@@ -5,12 +5,14 @@ import { Points } from "./points.js";
 import { Obstacles } from "./obstacles.js";
 
 const drawElement = (position, className) => {
-  const { x, y } = position;
-  const bodyElements = document.getElementsByClassName(
-    `board-element-${x}-${y}`
-  );
-
-  bodyElements[0].classList.add(className);
+  if (position) {
+    const { x, y } = position;
+    const bodyElements = document.getElementsByClassName(
+      `board-element-${x}-${y}`
+    );
+      
+    bodyElements[0].classList.add(className);
+  }
 };
 
 const drawObstacles = () => {

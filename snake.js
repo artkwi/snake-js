@@ -31,6 +31,9 @@ export const update = () => {
 };
 
 export const onSnake = (element, options) => {
+  if (!element) {
+    return false;
+  }
   const snakePosition = options?.withoutHead
     ? [...getSnakePosition()].slice(1)
     : getSnakePosition();
