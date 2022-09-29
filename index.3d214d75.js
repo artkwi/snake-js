@@ -605,8 +605,10 @@ const draw = ()=>{
     const x = document.getElementById("x");
     const y = document.getElementById("y");
     const pointsEl = document.getElementById("points");
-    x.textContent = (0, _snakeJs.getSnakePosition)()[0].x;
-    y.textContent = (0, _snakeJs.getSnakePosition)()[0].y;
+    if (x && y) {
+        x.textContent = (0, _snakeJs.getSnakePosition)()[0].x;
+        y.textContent = (0, _snakeJs.getSnakePosition)()[0].y;
+    }
     pointsEl.textContent = (0, _pointsJs.Points).getPoints();
     // end wynik
     (0, _snakeJs.getSnakePosition)().map(({ x , y  }, i)=>{
@@ -894,7 +896,7 @@ const checkForDeath = ()=>{
         withoutHead: true
     });
     const isSnakeOutsideGame = snakePosition[0].x < 0 || snakePosition[0].y < 0 || snakePosition[0].x >= (0, _indexJs.GAME_SIZE) || snakePosition[0].y >= (0, _indexJs.GAME_SIZE);
-    if (isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle) confirm("Koniec gry.", restartGame());
+    isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle;
 };
 
 },{"./index.js":"bB7Pu","./obstacles.js":"b87Cs","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"RlTrm":[function(require,module,exports) {
