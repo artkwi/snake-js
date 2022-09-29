@@ -543,6 +543,7 @@ var _endGameJs = require("./endGame.js");
 var _foodJs = require("./food.js");
 var _snakeJs = require("./snake.js");
 var _musicJs = require("/music.js");
+var _keysJs = require("./keys.js");
 const GAME_SIZE = 11;
 const GAME_SPEED = 2;
 let isGameStarted = false;
@@ -558,7 +559,7 @@ const update = ()=>{
     (0, _endGameJs.checkForDeath)();
 };
 
-},{"./draw.js":"gw9Xc","./endGame.js":"jcHq4","./food.js":"kUEI1","./snake.js":"e1hRg","/music.js":"RlTrm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gw9Xc":[function(require,module,exports) {
+},{"./draw.js":"gw9Xc","./endGame.js":"jcHq4","./food.js":"kUEI1","./snake.js":"e1hRg","/music.js":"RlTrm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./keys.js":"AakGV"}],"gw9Xc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "draw", ()=>draw);
@@ -911,6 +912,18 @@ playButtonMusic.addEventListener("click", (e)=>{
         playButtonMusic.textContent = "Play music";
     }
 });
+
+},{}],"AakGV":[function(require,module,exports) {
+window.addEventListener("keyup", arrowUp);
+window.addEventListener("keydown", arrowDown);
+function arrowDown(e) {
+    const key = document.querySelector(`.arrow-key[data-key="${e.keyCode}"]`);
+    key.classList.add("press");
+}
+function arrowUp(e) {
+    const key = document.querySelector(`.arrow-key[data-key="${e.keyCode}"]`);
+    key.classList.remove("press");
+}
 
 },{}]},["awEvQ","bB7Pu"], "bB7Pu", "parcelRequire4e7e")
 
