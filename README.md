@@ -1,3 +1,3 @@
-##snake-js
+## snake-js ##
 
-#Let's play! https://artkwi.github.io/snake-js/
+# Let's play! https://artkwi.github.io/snake-js/ #
