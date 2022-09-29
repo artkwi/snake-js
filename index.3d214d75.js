@@ -844,8 +844,7 @@ let inputDirection = {
     x: -1,
     y: 0
 };
-document.addEventListener("keydown", (e)=>{
-    const key = e.key;
+const setDirection = (key)=>{
     switch(key){
         case "ArrowLeft":
             if (getInputDirection().y === 0) inputDirection = {
@@ -874,8 +873,35 @@ document.addEventListener("keydown", (e)=>{
         default:
             break;
     }
+};
+document.addEventListener("keydown", (e)=>{
+    const key = e.key;
+    setDirection(key);
 });
 const getInputDirection = ()=>inputDirection;
+addEventListener("click", (e)=>{
+    const keyNumber = e.target.getAttribute("data-key");
+    let keyName = null;
+    if (keyNumber) {
+        switch(Number(keyNumber)){
+            case 37:
+                keyName = "ArrowLeft";
+                break;
+            case 39:
+                keyName = "ArrowRight";
+                break;
+            case 38:
+                keyName = "ArrowUp";
+                break;
+            case 40:
+                keyName = "ArrowDown";
+                break;
+            default:
+                break;
+        }
+        if (keyName) setDirection(keyName);
+    }
+});
 
 },{"./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jcHq4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
