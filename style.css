@@ -158,6 +158,7 @@
   transform: translate3d(0, 0, 0);
   transition: box-shadow .1s linear, transform .1s linear;
   width: 50px;
+  border: 0;
 }
 
 .arrow-key:active,.arrow-key.press {
