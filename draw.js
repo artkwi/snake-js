@@ -73,8 +73,10 @@ export const draw = () => {
   const y = document.getElementById("y");
   const pointsEl = document.getElementById("points");
 
-  x.textContent = getSnakePosition()[0].x;
-  y.textContent = getSnakePosition()[0].y;
+  if (x && y) {
+    x.textContent = getSnakePosition()[0].x;
+    y.textContent = getSnakePosition()[0].y;
+  }
   pointsEl.textContent = Points.getPoints();
 
   // end wynik
