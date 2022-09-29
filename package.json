@@ -1,0 +1,15 @@
+{
+  "name": "snake-js",
+  "author": "artkwi",
+  "scripts": {
+    "start": "yarn parcel index.html",
+    "build": "parcel build index.html --public-url ./",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}
