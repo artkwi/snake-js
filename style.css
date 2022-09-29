@@ -129,3 +129,50 @@
   margin-bottom: 20px;
   min-width: 150px;
 }
+
+/* arrow keys from https://codepen.io/FluidOfInsanity/pen/RKBgPP */
+.arrow-key-container {
+  display: inline-block;
+  text-align: center;
+  transform: translate3d(0,0,0);
+}
+
+.arrow-key-container {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
+
+.arrow-key {
+  align-items: center;
+  background: #ccc;
+  border-radius: 6px;
+  box-shadow: -1px 1px 0 #999, -2px 2px 0 #999, -3px 3px 0 #999, -4px 4px 0 #999;
+  color: #fff;
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: bold;
+  height: 50px;
+  justify-content: center;
+  margin: 5px;
+  transform: translate3d(0, 0, 0);
+  transition: box-shadow .1s linear, transform .1s linear;
+  width: 50px;
+}
+
+.arrow-key:active,.arrow-key.press {
+  box-shadow: 0px 0px 0 #999, 0px 0px 0 #999, 0px 0px 0 #999, -1px 1px 0 #999;
+  transform: translate3d(-3px, 3px, 0);
+}
+.arrow-key.left:before {
+  content: "\2190";
+}
+.arrow-key.up:before {
+  content: "\2191";
+}
+.arrow-key.down:before {
+  content: "\2193";
+}
+.arrow-key.right:before {
+  content: "\2192";
+}
