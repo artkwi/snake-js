@@ -923,7 +923,7 @@ const checkForDeath = ()=>{
         withoutHead: true
     });
     const isSnakeOutsideGame = snakePosition[0].x < 0 || snakePosition[0].y < 0 || snakePosition[0].x >= (0, _indexJs.GAME_SIZE) || snakePosition[0].y >= (0, _indexJs.GAME_SIZE);
-    isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle;
+    if (isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle) confirm("Koniec gry.", restartGame());
 };
 
 },{"./index.js":"bB7Pu","./obstacles.js":"b87Cs","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"RlTrm":[function(require,module,exports) {
