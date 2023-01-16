@@ -1,5 +1,4 @@
-import { getFoodPosition } from "./food.js";
-import { getInputDirection } from "./input.js";
+import { getInputDirection, setLastSnakeDirection } from "./input.js";
 
 let snakePosition = [
   { x: 10, y: 10 },
@@ -28,6 +27,7 @@ export const update = () => {
   };
 
   setSnakePosition([newHeadPosition, ...currentSnakePosition]);
+  setLastSnakeDirection(inputDirection);
 };
 
 export const onSnake = (element, options) => {
