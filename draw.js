@@ -3,6 +3,7 @@ import { getExtraFoodPosition, getFoodPosition } from "./food.js";
 import { GAME_SIZE, isGameStarted } from "./index.js";
 import { Points } from "./points.js";
 import { Obstacles } from "./obstacles.js";
+import { getSnakeDirectionName } from "./input.js";
 
 const drawElement = (position, className) => {
   if (position) {
@@ -10,7 +11,7 @@ const drawElement = (position, className) => {
     const bodyElements = document.getElementsByClassName(
       `board-element-${x}-${y}`
     );
-      
+
     bodyElements[0].classList.add(className);
   }
 };
@@ -26,8 +27,7 @@ const drawObstacles = () => {
       boardElements?.[0].classList?.add("obstacle");
     }
   });
-}
-
+};
 
 const initialBoardDraw = () => {
   const gameBoard = document.getElementById("game-board");
@@ -55,7 +55,11 @@ const laterBoardDraw = () => {
         `body-segment`,
         `food-segment`,
         `food-segment--extra`,
-        `body-segment--head`
+        `body-segment--head`,
+        `body-segment--head-left`,
+        `body-segment--head-right`,
+        `body-segment--head-up`,
+        `body-segment--head-down`
       );
     }
   }
@@ -87,13 +91,16 @@ export const draw = () => {
     );
     if (bodyElements.length) {
       if (i === 0) {
-        bodyElements?.[0].classList?.add("body-segment--head");
+        bodyElements?.[0].classList?.add(
+          `body-segment--head`,
+          `body-segment--head-${getSnakeDirectionName()}`
+        );
       }
       bodyElements?.[0].classList?.add("body-segment");
     }
   });
 
-  drawElement(getFoodPosition(), 'food-segment');
-  drawElement(getExtraFoodPosition() ,'food-segment--extra');
+  drawElement(getFoodPosition(), "food-segment");
+  drawElement(getExtraFoodPosition(), "food-segment--extra");
   drawObstacles();
 };

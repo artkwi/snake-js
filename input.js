@@ -1,4 +1,24 @@
 export let inputDirection = { x: -1, y: 0 };
+
+export const getSnakeDirectionName = () => {
+  let currentSnakeDirection = "up";
+
+  if (inputDirection.y === -1) {
+    currentSnakeDirection = "left";
+  }
+  if (inputDirection.y === 1) {
+    currentSnakeDirection = "right";
+  }
+  if (inputDirection.x === -1) {
+    currentSnakeDirection = "up";
+  }
+  if (inputDirection.x === 1) {
+    currentSnakeDirection = "down";
+  }
+
+  return currentSnakeDirection;
+};
+
 let lastSnakeDirection = inputDirection;
 
 const getLastSnakeDirection = () => lastSnakeDirection;
