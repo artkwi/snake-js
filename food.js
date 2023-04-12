@@ -1,4 +1,4 @@
-import { GAME_SIZE, GAME_SPEED } from "./index.js";
+import { GAME_SIZE, GAME_SPEED } from "./constants.js";
 import { Obstacles } from "./obstacles.js";
 import { Points } from "./points.js";
 import { onSnake, expandSnake } from "./snake.js";
@@ -21,7 +21,7 @@ export const setFoodPosition = (newFoodPosition) =>
 export const setExtraFoodPosition = (newFoodPosition) =>
   (extraFoodPosition = { ...newFoodPosition });
 
-export const removeExtraFoodPosition = () => extraFoodPosition = null;
+export const removeExtraFoodPosition = () => (extraFoodPosition = null);
 
 export const update = () => {
   if (onSnake(getFoodPosition())) {
@@ -31,8 +31,7 @@ export const update = () => {
     if (shouldRespawnExtraFood()) {
       respawnExtraFood();
     }
-  }
-  else if (onSnake(getExtraFoodPosition())) {
+  } else if (onSnake(getExtraFoodPosition())) {
     Points.setPoints(Points.getPoints() + 4 * GAME_SPEED);
     expandSnake();
     removeExtraFoodPosition();
@@ -41,7 +40,11 @@ export const update = () => {
 
 const respawnFood = () => {
   let newFoodPosition = null;
-  while (newFoodPosition === null || onSnake(newFoodPosition) || Obstacles.onObstacle(newFoodPosition)) {
+  while (
+    newFoodPosition === null ||
+    onSnake(newFoodPosition) ||
+    Obstacles.onObstacle(newFoodPosition)
+  ) {
     const x = Math.floor(Math.random() * GAME_SIZE);
     const y = Math.floor(Math.random() * GAME_SIZE);
     newFoodPosition = { x, y };
@@ -58,11 +61,15 @@ const shouldRespawnExtraFood = () => {
   const randomNumber = Math.floor(Math.random() * (POSSIBILITIES - 1));
 
   return randomNumber % POSSIBILITIES === 0;
-}
+};
 
 const respawnExtraFood = () => {
   let newExtraFoodPosition = null;
-  while (newExtraFoodPosition === null || onSnake(newExtraFoodPosition) || Obstacles.onObstacle(newExtraFoodPosition)) {
+  while (
+    newExtraFoodPosition === null ||
+    onSnake(newExtraFoodPosition) ||
+    Obstacles.onObstacle(newExtraFoodPosition)
+  ) {
     const x = Math.floor(Math.random() * GAME_SIZE);
     const y = Math.floor(Math.random() * GAME_SIZE);
     newExtraFoodPosition = { x, y };

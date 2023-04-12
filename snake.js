@@ -1,10 +1,15 @@
+import { GAME_SIZE } from "./constants.js";
 import { getInputDirection, setLastSnakeDirection } from "./input.js";
 
-let snakePosition = [
-  { x: 10, y: 10 },
-  { x: 11, y: 10 },
-  { x: 12, y: 10 },
-];
+const initSnakePosition = () => {
+  return [
+    { x: GAME_SIZE - 3, y: GAME_SIZE - 1 },
+    { x: GAME_SIZE - 2, y: GAME_SIZE - 1 },
+    { x: GAME_SIZE - 1, y: GAME_SIZE - 1 },
+  ];
+};
+
+let snakePosition = initSnakePosition();
 
 export const getSnakePosition = () => snakePosition;
 export const setSnakePosition = (newSnakePosition) =>

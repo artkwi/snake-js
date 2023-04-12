@@ -1,4 +1,5 @@
-import { gameIntervelId, GAME_SIZE } from "./index.js";
+import { GAME_SIZE } from "./constants.js";
+import { gameIntervelId } from "./index.js";
 import { Obstacles } from "./obstacles.js";
 import { getSnakePosition, onSnake } from "./snake.js";
 
@@ -10,7 +11,9 @@ const restartGame = () => {
 export const checkForDeath = () => {
   const snakePosition = getSnakePosition();
   const isHeadIsOnBody = onSnake(snakePosition[0], { withoutHead: true });
-  const isHeadOnObstacle = Obstacles.onObstacle(snakePosition[0], { withoutHead: true });
+  const isHeadOnObstacle = Obstacles.onObstacle(snakePosition[0], {
+    withoutHead: true,
+  });
   const isSnakeOutsideGame =
     snakePosition[0].x < 0 ||
     snakePosition[0].y < 0 ||

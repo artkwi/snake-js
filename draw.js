@@ -1,9 +1,10 @@
 import { getSnakePosition } from "./snake.js";
 import { getExtraFoodPosition, getFoodPosition } from "./food.js";
-import { GAME_SIZE, isGameStarted } from "./index.js";
+import { isGameStarted } from "./index.js";
 import { Points } from "./points.js";
 import { Obstacles } from "./obstacles.js";
 import { getSnakeDirectionName } from "./input.js";
+import { GAME_SIZE } from "./constants.js";
 
 const drawElement = (position, className) => {
   if (position) {
