@@ -17,6 +17,6 @@ export const checkForDeath = () => {
     snakePosition[0].x >= GAME_SIZE ||
     snakePosition[0].y >= GAME_SIZE;
   if (isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle) {
-    confirm("Koniec gry.", restartGame());
+    confirm("Koniec gry", restartGame());
   }
 };
