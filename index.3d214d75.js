@@ -534,8 +534,6 @@ function hmrAcceptRun(bundle, id) {
 },{}],"bB7Pu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "GAME_SIZE", ()=>GAME_SIZE);
-parcelHelpers.export(exports, "GAME_SPEED", ()=>GAME_SPEED);
 parcelHelpers.export(exports, "isGameStarted", ()=>isGameStarted);
 parcelHelpers.export(exports, "gameIntervelId", ()=>gameIntervelId);
 var _drawJs = require("./draw.js");
@@ -544,22 +542,21 @@ var _foodJs = require("./food.js");
 var _snakeJs = require("./snake.js");
 var _musicJs = require("/music.js");
 var _keysJs = require("./keys.js");
-const GAME_SIZE = 11;
-const GAME_SPEED = 2;
+var _constantsJs = require("./constants.js");
 let isGameStarted = false;
 const main = ()=>{
     update();
     (0, _drawJs.draw)();
     isGameStarted = true;
 };
-const gameIntervelId = window.setInterval(main, 1000 / GAME_SPEED);
+const gameIntervelId = window.setInterval(main, 1000 / (0, _constantsJs.GAME_SPEED));
 const update = ()=>{
     (0, _snakeJs.update)();
     (0, _foodJs.update)();
     (0, _endGameJs.checkForDeath)();
 };
 
-},{"./draw.js":"gw9Xc","./endGame.js":"jcHq4","./food.js":"kUEI1","./snake.js":"e1hRg","/music.js":"RlTrm","./keys.js":"AakGV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gw9Xc":[function(require,module,exports) {
+},{"./draw.js":"gw9Xc","./endGame.js":"jcHq4","./food.js":"kUEI1","./snake.js":"e1hRg","/music.js":"RlTrm","./keys.js":"AakGV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./constants.js":"8eIVP"}],"gw9Xc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "draw", ()=>draw);
@@ -569,6 +566,7 @@ var _indexJs = require("./index.js");
 var _pointsJs = require("./points.js");
 var _obstaclesJs = require("./obstacles.js");
 var _inputJs = require("./input.js");
+var _constantsJs = require("./constants.js");
 const drawElement = (position, className)=>{
     if (position) {
         const { x , y  } = position;
@@ -586,16 +584,16 @@ const drawObstacles = ()=>{
 const initialBoardDraw = ()=>{
     const gameBoard = document.getElementById("game-board");
     gameBoard.innerHTML = "";
-    gameBoard.style.gridTemplateColumns = `repeat(${0, _indexJs.GAME_SIZE}, 1fr)`;
-    gameBoard.style.gridTemplateRows = `repeat(${0, _indexJs.GAME_SIZE}, 1fr)`;
-    for(let i = 0; i < (0, _indexJs.GAME_SIZE); i++)for(let j = 0; j < (0, _indexJs.GAME_SIZE); j++){
+    gameBoard.style.gridTemplateColumns = `repeat(${0, _constantsJs.GAME_SIZE}, 1fr)`;
+    gameBoard.style.gridTemplateRows = `repeat(${0, _constantsJs.GAME_SIZE}, 1fr)`;
+    for(let i = 0; i < (0, _constantsJs.GAME_SIZE); i++)for(let j = 0; j < (0, _constantsJs.GAME_SIZE); j++){
         const boardElement = document.createElement("div");
         boardElement.classList.add("board-element", `board-element-${i}-${j}`);
         gameBoard.appendChild(boardElement);
     }
 };
 const laterBoardDraw = ()=>{
-    for(let i = 0; i < (0, _indexJs.GAME_SIZE); i++)for(let j = 0; j < (0, _indexJs.GAME_SIZE); j++){
+    for(let i = 0; i < (0, _constantsJs.GAME_SIZE); i++)for(let j = 0; j < (0, _constantsJs.GAME_SIZE); j++){
         const boardElement = document.getElementsByClassName(`board-element-${i}-${j}`);
         boardElement[0].classList.remove(`body-segment`, `food-segment`, `food-segment--extra`, `body-segment--head`, `body-segment--head-left`, `body-segment--head-right`, `body-segment--head-up`, `body-segment--head-down`);
     }
@@ -625,7 +623,7 @@ const draw = ()=>{
     drawObstacles();
 };
 
-},{"./snake.js":"e1hRg","./food.js":"kUEI1","./index.js":"bB7Pu","./points.js":"gjsrg","./obstacles.js":"b87Cs","./input.js":"kjUbp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e1hRg":[function(require,module,exports) {
+},{"./snake.js":"e1hRg","./food.js":"kUEI1","./index.js":"bB7Pu","./points.js":"gjsrg","./obstacles.js":"b87Cs","./input.js":"kjUbp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./constants.js":"8eIVP"}],"e1hRg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getSnakePosition", ()=>getSnakePosition);
@@ -633,21 +631,25 @@ parcelHelpers.export(exports, "setSnakePosition", ()=>setSnakePosition);
 parcelHelpers.export(exports, "update", ()=>update);
 parcelHelpers.export(exports, "onSnake", ()=>onSnake);
 parcelHelpers.export(exports, "expandSnake", ()=>expandSnake);
+var _constantsJs = require("./constants.js");
 var _inputJs = require("./input.js");
-let snakePosition = [
-    {
-        x: 10,
-        y: 10
-    },
-    {
-        x: 11,
-        y: 10
-    },
-    {
-        x: 12,
-        y: 10
-    }, 
-];
+const initSnakePosition = ()=>{
+    return [
+        {
+            x: (0, _constantsJs.GAME_SIZE) - 3,
+            y: (0, _constantsJs.GAME_SIZE) - 1
+        },
+        {
+            x: (0, _constantsJs.GAME_SIZE) - 2,
+            y: (0, _constantsJs.GAME_SIZE) - 1
+        },
+        {
+            x: (0, _constantsJs.GAME_SIZE) - 1,
+            y: (0, _constantsJs.GAME_SIZE) - 1
+        }, 
+    ];
+};
+let snakePosition = initSnakePosition();
 const getSnakePosition = ()=>snakePosition;
 const setSnakePosition = (newSnakePosition)=>snakePosition = [
         ...newSnakePosition
@@ -685,7 +687,7 @@ const expandSnake = ()=>{
     setSnakePosition(snakePosition);
 };
 
-},{"./input.js":"kjUbp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kjUbp":[function(require,module,exports) {
+},{"./input.js":"kjUbp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./constants.js":"8eIVP"}],"kjUbp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "inputDirection", ()=>inputDirection);
@@ -800,7 +802,15 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"kUEI1":[function(require,module,exports) {
+},{}],"8eIVP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "GAME_SIZE", ()=>GAME_SIZE);
+parcelHelpers.export(exports, "GAME_SPEED", ()=>GAME_SPEED);
+const GAME_SIZE = 11;
+const GAME_SPEED = 2;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kUEI1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getFoodPosition", ()=>getFoodPosition);
@@ -809,7 +819,7 @@ parcelHelpers.export(exports, "setFoodPosition", ()=>setFoodPosition);
 parcelHelpers.export(exports, "setExtraFoodPosition", ()=>setExtraFoodPosition);
 parcelHelpers.export(exports, "removeExtraFoodPosition", ()=>removeExtraFoodPosition);
 parcelHelpers.export(exports, "update", ()=>update);
-var _indexJs = require("./index.js");
+var _constantsJs = require("./constants.js");
 var _obstaclesJs = require("./obstacles.js");
 var _pointsJs = require("./points.js");
 var _snakeJs = require("./snake.js");
@@ -832,12 +842,12 @@ const setExtraFoodPosition = (newFoodPosition)=>extraFoodPosition = {
 const removeExtraFoodPosition = ()=>extraFoodPosition = null;
 const update = ()=>{
     if ((0, _snakeJs.onSnake)(getFoodPosition())) {
-        (0, _pointsJs.Points).setPoints((0, _pointsJs.Points).getPoints() + (0, _indexJs.GAME_SPEED));
+        (0, _pointsJs.Points).setPoints((0, _pointsJs.Points).getPoints() + (0, _constantsJs.GAME_SPEED));
         (0, _snakeJs.expandSnake)();
         respawnFood();
         if (shouldRespawnExtraFood()) respawnExtraFood();
     } else if ((0, _snakeJs.onSnake)(getExtraFoodPosition())) {
-        (0, _pointsJs.Points).setPoints((0, _pointsJs.Points).getPoints() + 4 * (0, _indexJs.GAME_SPEED));
+        (0, _pointsJs.Points).setPoints((0, _pointsJs.Points).getPoints() + 4 * (0, _constantsJs.GAME_SPEED));
         (0, _snakeJs.expandSnake)();
         removeExtraFoodPosition();
     }
@@ -845,8 +855,8 @@ const update = ()=>{
 const respawnFood = ()=>{
     let newFoodPosition = null;
     while(newFoodPosition === null || (0, _snakeJs.onSnake)(newFoodPosition) || (0, _obstaclesJs.Obstacles).onObstacle(newFoodPosition)){
-        const x = Math.floor(Math.random() * (0, _indexJs.GAME_SIZE));
-        const y = Math.floor(Math.random() * (0, _indexJs.GAME_SIZE));
+        const x = Math.floor(Math.random() * (0, _constantsJs.GAME_SIZE));
+        const y = Math.floor(Math.random() * (0, _constantsJs.GAME_SIZE));
         newFoodPosition = {
             x,
             y
@@ -863,8 +873,8 @@ const shouldRespawnExtraFood = ()=>{
 const respawnExtraFood = ()=>{
     let newExtraFoodPosition = null;
     while(newExtraFoodPosition === null || (0, _snakeJs.onSnake)(newExtraFoodPosition) || (0, _obstaclesJs.Obstacles).onObstacle(newExtraFoodPosition)){
-        const x = Math.floor(Math.random() * (0, _indexJs.GAME_SIZE));
-        const y = Math.floor(Math.random() * (0, _indexJs.GAME_SIZE));
+        const x = Math.floor(Math.random() * (0, _constantsJs.GAME_SIZE));
+        const y = Math.floor(Math.random() * (0, _constantsJs.GAME_SIZE));
         newExtraFoodPosition = {
             x,
             y
@@ -873,7 +883,7 @@ const respawnExtraFood = ()=>{
     setExtraFoodPosition(newExtraFoodPosition);
 };
 
-},{"./index.js":"bB7Pu","./obstacles.js":"b87Cs","./points.js":"gjsrg","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b87Cs":[function(require,module,exports) {
+},{"./obstacles.js":"b87Cs","./points.js":"gjsrg","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./constants.js":"8eIVP"}],"b87Cs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Obstacles", ()=>Obstacles);
@@ -924,6 +934,7 @@ class Points {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "checkForDeath", ()=>checkForDeath);
+var _constantsJs = require("./constants.js");
 var _indexJs = require("./index.js");
 var _obstaclesJs = require("./obstacles.js");
 var _snakeJs = require("./snake.js");
@@ -939,11 +950,11 @@ const checkForDeath = ()=>{
     const isHeadOnObstacle = (0, _obstaclesJs.Obstacles).onObstacle(snakePosition[0], {
         withoutHead: true
     });
-    const isSnakeOutsideGame = snakePosition[0].x < 0 || snakePosition[0].y < 0 || snakePosition[0].x >= (0, _indexJs.GAME_SIZE) || snakePosition[0].y >= (0, _indexJs.GAME_SIZE);
+    const isSnakeOutsideGame = snakePosition[0].x < 0 || snakePosition[0].y < 0 || snakePosition[0].x >= (0, _constantsJs.GAME_SIZE) || snakePosition[0].y >= (0, _constantsJs.GAME_SIZE);
     if (isHeadIsOnBody || isSnakeOutsideGame || isHeadOnObstacle) confirm("Koniec gry", restartGame());
 };
 
-},{"./index.js":"bB7Pu","./obstacles.js":"b87Cs","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"RlTrm":[function(require,module,exports) {
+},{"./index.js":"bB7Pu","./obstacles.js":"b87Cs","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./constants.js":"8eIVP"}],"RlTrm":[function(require,module,exports) {
 const playButtonMusic = document.getElementById("play-music-button");
 const playerElement = document.getElementById("player");
 const playMusic = ()=>{
