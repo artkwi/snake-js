@@ -13,8 +13,8 @@
 #game-board {
   height: 80vmin;
   width: 80vmin;
-  background-color: #4158d0;
-  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+  background-color: #5983fc;
+  background-image: linear-gradient(90deg, #5983fc 0%, #cfe5ff 100%);
   border: 5px solid #666;
   grid-template-rows: repeat(21, 1fr);
   grid-template-columns: repeat(21, 1fr);
@@ -25,25 +25,42 @@
 }
 
 .body-segment {
-  background-color: #00000073;
+  background-color: #528f29;
+  background-image: url("snake_body.1548f859.jpg");
+  background-size: contain;
+  border-radius: 6px;
 }
 
 .body-segment--head {
-  background-color: #d3d705d9;
+  background-color: #0000;
+  background-image: url("snake_head.fa9cbd28.png");
+  background-size: contain;
+}
+
+.body-segment--head-up {
+  transform: rotate(180deg);
+}
+
+.body-segment--head-left {
+  transform: rotate(90deg);
+}
+
+.body-segment--head-right {
+  transform: rotate(270deg);
 }
 
 @keyframes spin {
   0% {
-    background-color: #61ff00;
+    background-color: #d293fb;
     transform: rotate(0);
   }
 
   50% {
-    background-color: #ffe600;
+    background-color: #ce3ef5;
   }
 
   100% {
-    background-color: #61ff00;
+    background-color: #d293fb;
     transform: rotate(360deg);
   }
 }
@@ -110,7 +127,7 @@
   appearance: none;
   color: #fff;
   text-transform: uppercase;
-  min-width: 150px;
+  min-width: 180px;
   background: #7549ff;
   border: 2px solid #666;
   outline: none;

@@ -946,14 +946,18 @@ const checkForDeath = ()=>{
 },{"./index.js":"bB7Pu","./obstacles.js":"b87Cs","./snake.js":"e1hRg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"RlTrm":[function(require,module,exports) {
 const playButtonMusic = document.getElementById("play-music-button");
 const playerElement = document.getElementById("player");
-playButtonMusic.addEventListener("click", (e)=>{
+const playMusic = ()=>{
     if (playerElement.paused) {
         playerElement.play();
-        playButtonMusic.textContent = "Pause music";
+        playButtonMusic.textContent = "Pause music (M)";
     } else {
         playerElement.pause();
-        playButtonMusic.textContent = "Play music";
+        playButtonMusic.textContent = "Play music (M)";
     }
+};
+playButtonMusic.addEventListener("click", playMusic);
+document.addEventListener("keydown", (e)=>{
+    if (e.key == "m") playMusic();
 });
 
 },{}],"AakGV":[function(require,module,exports) {
@@ -961,11 +965,11 @@ window.addEventListener("keyup", arrowUp);
 window.addEventListener("keydown", arrowDown);
 function arrowDown(e) {
     const key = document.querySelector(`.arrow-key[data-key="${e.keyCode}"]`);
-    key.classList.add("press");
+    if (key) key.classList.add("press");
 }
 function arrowUp(e) {
     const key = document.querySelector(`.arrow-key[data-key="${e.keyCode}"]`);
-    key.classList.remove("press");
+    if (key) key.classList.remove("press");
 }
 
 },{}]},["awEvQ","bB7Pu"], "bB7Pu", "parcelRequire4e7e")
